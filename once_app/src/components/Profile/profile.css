@@ -1,0 +1,12 @@
+.profile{
+	display: flex;
+}
+
+.profileContainer{
+	flex: 9;
+}
+
+.profileHr{
+	width: 80%;
+	margin: 25px 0 0 10%;
+}

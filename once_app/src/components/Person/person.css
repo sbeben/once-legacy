@@ -1,0 +1,35 @@
+.profileTop {
+	padding: 20px;
+}
+
+.profileInfo{
+	width: 90%;
+	margin-left: 5%;
+	margin-top: 25px;
+	display: flex;
+}
+
+.profileImg{
+	height: 400px;
+	object-fit: contain;
+	border-style: solid;
+	border-color: #000000;
+	border-width: 1px;
+}
+
+.profileInfoText{
+	margin-left: 25px;
+}
+
+.profileInfoName{
+	font-size: 32px;
+	font-weight: bold;
+}
+
+.profileInfoItems{
+	margin-top: 20px;
+}
+
+.profileInfoKey{
+	font-weight: bold;
+}

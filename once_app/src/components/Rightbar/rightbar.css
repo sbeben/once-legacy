@@ -1,0 +1,28 @@
+.rightbar{
+	flex: 3.5;
+}
+
+.rightbarWrapper{
+	padding: 20px 20px 0 0;
+}
+
+.birthdayContainer{
+	display: flex;
+	align-items: center;
+/*	border-style: solid;
+	border-width: 1px;
+	border-color: #000000;*/
+}
+
+.birthdayIcon{
+	margin-right: 5px;
+}
+
+.birthdayText{
+	font-size: 15px;
+}
+
+.rightbarAd{
+	width: 100%;
+	margin: 20px 0 20px 0;
+}
