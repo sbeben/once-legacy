@@ -26,7 +26,7 @@ export default function Profile() {
 		<div>
 			<Topbar/>
 			<div className="profile">
-				<Sidebar/>
+				<Sidebar user={user}/>
 				<div className="profileContainer">
 					<Person user={user}/>
 					<hr className="profileHr"/>

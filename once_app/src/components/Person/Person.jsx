@@ -1,9 +1,26 @@
 import './person.css';
-
+import Contacts from '../Contacts/Contacts';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import {Link} from 'react-router-dom';
 
 export default function Person({user}) {
 
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+	const [contacts, setContacts] = useState([]);
+
+	useEffect(() => {
+		const getContacts = async () => {
+			try{
+				const contactList = await axios.get("/users/friends/" + user._id);
+				setContacts(contactList.data);
+			}catch(err){
+				console.log(err);
+			}	
+		};
+		getContacts();
+	}, [user._id]);
+
 
 	return(
 		<div className="profileTop">
@@ -24,6 +41,16 @@ export default function Person({user}) {
 						<div className="profileInfoItem">
 							<span className="profileInfoKey">Status: </span>
 							<span className="profileInfoValue">{user.status === 1 ? "Active" : user.status === 2 ? "Inactive" : "Reasoning"}</span>
+						</div>
+						<div className="profileInfoItem">
+							<span className="profileInfoKey">Contacts: </span>
+							<span className="profileInfoValue">
+							{contacts.map(friend => (
+							<Link to={"/profile/" + friend.username} style={{textDecoration: "none"}}>
+							<Contacts key={friend._id} user={friend}/>
+							</Link>
+							))}
+							</span>
 						</div>
 					</div>
 				</div>

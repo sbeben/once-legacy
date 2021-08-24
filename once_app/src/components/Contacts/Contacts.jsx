@@ -7,7 +7,7 @@ export default function Contacts({user}) {
 	return (
 		<div>
 			<li className="sidebarFriend">
-				<img className="sidebarFriendImg" src={PF + user.profilePicture} alt=""/>
+				<img className="sidebarFriendImg" src={user.profilePicture ? PF + user.profilePicture : PF + "8.jpg"} alt=""/>
 				<span className="sidebarFriendName">{user.username}</span>
 			</li>	
 		</div>

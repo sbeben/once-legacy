@@ -1,6 +1,7 @@
 import './sidebar.css';
+import Contacts from '../Contacts/Contacts';
 import {Users} from '../../data';
-import Contacts from '../Contacts/Contacts'
+import axios from 'axios';
 import { RssFeed,
 	Chat,
 	PlayCircleFilledOutlined,
@@ -59,8 +60,8 @@ export default function Sidebar() {
 				 <hr className="sidebarHr"/>
 				
 				<ul className="sidebarFriendList">
-					{Users.map(u => (
-						<Contacts key={u.id} user={u}/>
+					{Users.map(friend => (
+						<Contacts key={friend.id} user={friend}/>
 					))} 	
 				</ul>
 
