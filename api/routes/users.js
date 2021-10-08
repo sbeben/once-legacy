@@ -1,6 +1,7 @@
 const User = require("../models/User");
 const router = require("express").Router();
 const bcrypt = require("bcrypt");
+const mongoose = require("mongoose");
 
 //update user
 router.put("/:id", async (req,res) => {
@@ -64,7 +65,9 @@ router.get("/", async (req, res) => {
 //get contacts
 router.get("/friends/:userId", async (req,res) => {
 	try{
+		console.log(req.params);
 		const user = await User.findById(req.params.userId);
+		console.log("11111111111", user);
 		const contacts = await Promise.all(
 			user.follows.map(friendId => {
 				return User.findById(friendId)
@@ -77,6 +80,7 @@ router.get("/friends/:userId", async (req,res) => {
 			res.status(200).json(contactList);
 		})
 	}catch(err){
+		console.log(err);
 		res.status(500).json(err.message);
 	}
 })
