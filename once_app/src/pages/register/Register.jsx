@@ -1,4 +1,5 @@
 import './register.css';
+import {Link} from 'react-router-dom';
 import { useRef, useContext} from 'react';
 import { useHistory } from 'react-router';
 import {regCall} from "../../apiCalls"
@@ -42,7 +43,7 @@ export default function Register() {
 						<input placeholder="Password" required ref={password} className="loginInput" type="password"/>
 						<input placeholder="Repeat password" required ref={passwordRepeat} className="loginInput" type="password"/>
 						<button className="loginButton" type="submit" disabled={isFetching}>{isFetching ? "loading" : "Sign Up"}</button>
-						<button className="loginRegisterButton">Log in</button>
+						<button className="loginRegisterButton">{<Link to="/login">Log in</Link>}</button>
 					</form>
 				</div>
 			</div>

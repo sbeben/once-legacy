@@ -85,6 +85,7 @@
 	align-self: center;
 	border: none;
 	background-color: #ffffff;
+	text-decoration: none;
 }
 
 .loginRegisterButton:focus{

@@ -1,4 +1,5 @@
 import './login.css';
+import {Link} from 'react-router-dom';
 import {useRef, useContext} from 'react';
 import {loginCall} from "../../apiCalls"
 import {AuthContext} from "../../context/AuthContext";
@@ -26,7 +27,8 @@ export default function Login() {
 						<input required type ="password" placeholder="Password" className="loginInput" ref={password}/>
 						<button className="loginButton" type ="submit" disabled={isFetching}>{isFetching ? "loading" : "Log In"}</button>
 						<span className="loginForgot">Forgot Password?</span>
-						<button  className="loginRegisterButton">Create account</button>
+						<button  className="loginRegisterButton">{<Link to="/register">Create account</Link>}</button>
+						
 					</form>
 				</div>
 			</div>
