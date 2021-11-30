@@ -16,6 +16,8 @@ export default function Messenger() {
 	const scrollRef = useRef();
 	const {user} = useContext(AuthContext);
 
+	console.log(conversations);
+
 useEffect(() => {
 	const getConversations = async () => {
 		try{
@@ -64,13 +66,17 @@ useEffect(() => {
 		<div>
 			<Topbar />
 			<div className="messenger">
-				{
-					conversations.map(c=>(
-						<div onClick={()=>{setCurrentChat(c);}}>
-						<ChatList conversation={c} currentUser={user} key={c.members[1]}/>
-						</div>
-					))
-				}
+				<div className="chatListWrapper">
+					<ul className="chatList">
+					{
+						conversations.map(c=>(
+							<div onClick={()=>{setCurrentChat(c);}}>
+							<ChatList conversation={c} currentUser={user} key={c.members[1]}/>
+							</div>
+						))
+					}
+					</ul>
+				</div>
 				<div className="messengerContainer">
 					{
 						currentChat ? 

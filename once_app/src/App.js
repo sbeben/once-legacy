@@ -14,25 +14,25 @@ function App() {
 
   return (
     <div>
-    <Router>
-    <Messenger />
-    </Router>
-   {/* <Router>
-          <Switch>
-            <Route exact path="/">
-              {user ? <Home/> : <Login/>}
-            </Route>
-            <Route exact path="/login">
-              {user ? <Redirect to="/"/> : <Login/>}
-            </Route>
-            <Route exact path="/register">
-              {user ? <Redirect to="/"/> : <Register/>}
-            </Route>
-            <Route exact path="/profile/:username">
-              <Profile/>
-            </Route>
-          </Switch> 
-        </Router>*/}
+      <Router>
+       <Switch>
+          <Route exact path="/messenger"> 
+            {!user ? <Redirect to="/" /> : <Messenger />}
+          </Route>
+          <Route exact path="/">
+            {user ? <Home/> : <Login/>}
+          </Route>
+          <Route exact path="/login">
+            {user ? <Redirect to="/"/> : <Login/>}
+          </Route>
+          <Route exact path="/register">
+            {user ? <Redirect to="/"/> : <Register/>}
+          </Route>
+          <Route exact path="/profile/:username">
+            <Profile/>
+          </Route>
+        </Switch> 
+      </Router>
     </div> 
  );
 }

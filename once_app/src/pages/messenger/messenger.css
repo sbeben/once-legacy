@@ -1,6 +1,24 @@
 .messenger{
 	display: flex;
-	height: calc(100vh - 51px);
+	height: calc(100vh - 53px);
+}
+
+.chatList{
+	flex: 4;
+
+	overflow-y: scroll;
+	position: sticky;
+	top: 53px;
+}
+
+.chatListWrapper{
+	padding: 20px;
+}
+
+.chatList{
+	margin: 0;
+	padding: 0;
+	list-style: none;
 }
 
 .messengerContainer{

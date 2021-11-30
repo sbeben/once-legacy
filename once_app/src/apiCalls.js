@@ -10,6 +10,11 @@ export const loginCall = async (userCredential, dispatch) => {
 	}
 };
 
+export const logoutCall = async (dispatch) => {
+	localStorage.clear();
+	dispatch({type: "LOGOUT"})
+};
+
 export const regCall = async (userCredential, dispatch) => {
 	dispatch({type: "REGISTER_START"});
 	try {

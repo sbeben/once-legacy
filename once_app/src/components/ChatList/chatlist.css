@@ -1,12 +1,5 @@
-.chatList{
-	flex: 3;
-	height: calc(100vh - 53px);
-	overflow-y: scroll;
-	position: sticky;
-	top: 53px;
-}
 
-::-webkit-scrollbar{
+/*::-webkit-scrollbar{
 	width: 1px;
 }
 
@@ -17,7 +10,7 @@
 ::-webkit-scrollbar-thumb{
 	background-color: #000000;
 }
-
+*/
 .chatListFriend{
 	display: flex;
 	align-items: center;

@@ -23,11 +23,9 @@ export default function ChatList({conversation, currentUser}) {
 	}, [currentUser, conversation]);
 
 	return (
-		<div className="chatList">
 			<li className="chatListFriend">
 				<img className="chatListFriendImg" src={user?.profilePicture ? PF + user.profilePicture : PF + "8.jpg"} alt=""/>
 				<span className="chatListFriendName">{user?.username || "Some Friend" }</span>
-			</li>	
-		</div>
+			</li>		
 	)
 }

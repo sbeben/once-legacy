@@ -34,11 +34,20 @@ export default function Person({user}) {
 			} else {
 				await axios.put("/users/" + user._id + "/follow", {userId: currentUser._id});
 				dispatch({type: "FOLLOW", payload: user._id});
+				createConversation({user, currentUser})
 			}
 		}catch(err){
 			console.log(err)
 		}
 		setFollowed(!followed);
+	};
+
+	const createConversation = async ({user, currentUser}) => {
+		try {
+			await axios.post("/conversations/", {senderId: currentUser._id, receiverId: user._id});
+		} catch(err) {
+			console.log(err);
+		}
 	};
 
 	return(
