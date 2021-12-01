@@ -29,7 +29,7 @@ function App() {
             {user ? <Redirect to="/"/> : <Register/>}
           </Route>
           <Route exact path="/profile/:username">
-            <Profile/>
+           {!user ? <Redirect to="/"/> : <Profile/>}
           </Route>
         </Switch> 
       </Router>
