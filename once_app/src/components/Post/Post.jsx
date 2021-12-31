@@ -43,8 +43,8 @@ export default function Post({post}) {
 			<div className="postWrapper">
 				<div className="postTop">
 					<div className="postTopLeft">
-						<Link to={`profile/${user.username}`}>
-						<img className="postProfileImg" src={user.profilePicture ? PF + user.profilePicture : PF+"8.jpg"} alt=""/>
+						<Link to={`/profile/${user.username}`}>
+						<img className="postProfileImg" src={user.profilePicture && user.profilePicture.length > 5 ? user.profilePicture : PF+"8.jpg"} alt=""/>
 						</Link>
 						<span className="postUsername">{user.username}</span>
 						<span className="postDate">{format(post.createdAt)}</span>

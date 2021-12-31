@@ -1,16 +1,17 @@
 .profileTop {
+	width: 90%;
 	padding: 20px;
+	margin-left: 5%;
+	margin-top: 25px;
 }
 
 .profileInfo{
-	width: 90%;
-	margin-left: 5%;
-	margin-top: 25px;
 	display: flex;
 }
 
 .profileImg{
-	height: 400px;
+	/*height: 400px;*/
+	max-width: 55%;
 	object-fit: contain;
 	border-style: solid;
 	border-color: #000000;
@@ -19,11 +20,32 @@
 
 .profileInfoText{
 	margin-left: 25px;
+	overflow-wrap: break-word;
 }
 
 .profileInfoName{
 	font-size: 32px;
 	font-weight: bold;
+	overflow-wrap: break-word
+}
+
+.editIcon{
+	cursor: pointer !important;
+}
+
+.editDesc{
+	display: block;
+}
+
+.editPic{
+	display: block;
+}
+
+.nameAndEdit{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
 }
 
 .profileInfoItems{

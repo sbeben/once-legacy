@@ -9,6 +9,7 @@ const authRouter = require("./routes/auth");
 const postRouter = require("./routes/posts");
 const conversationRouter = require("./routes/conversations");
 const messageRouter = require("./routes/messages");
+const searchRouter = require("./routes/search");
 const multer = require("multer");
 
 const app = express();
@@ -54,6 +55,7 @@ app.use("/api/auth", authRouter);
 app.use("/api/posts", postRouter);
 app.use("/api/conversations", conversationRouter);
 app.use("/api/messages", messageRouter);
+app.use("/api/search", searchRouter);
 
 
 app.listen(8800, () => {

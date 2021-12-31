@@ -50,6 +50,10 @@
 	object-fit: contain;
 }
 
+.postText{
+	overflow-wrap: break-word;
+}
+
 .postBottom{
 	display: flex;
 	align-items: center;

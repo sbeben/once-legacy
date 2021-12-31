@@ -24,8 +24,8 @@ export default function ChatList({conversation, currentUser}) {
 
 	return (
 			<li className="chatListFriend">
-				<img className="chatListFriendImg" src={user?.profilePicture ? PF + user.profilePicture : PF + "8.jpg"} alt=""/>
-				<span className="chatListFriendName">{user?.username || "Some Friend" }</span>
+				<img className="chatListFriendImg" src={user?.profilePicture && user.profilePicture.length > 5 ? user.profilePicture : PF + "8.jpg"} alt=""/>
+				<span className="chatListFriendName">{user?.username || "Loading..." }</span>
 			</li>		
 	)
 }

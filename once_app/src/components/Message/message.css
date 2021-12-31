@@ -23,6 +23,7 @@
     background-color: #000000;
     color: #ffffff;
     max-width: 400px;
+    overflow-wrap: break-word;
 }
 
 .messageBottom{
@@ -41,4 +42,5 @@
 	border-color: #000000;
     background-color: #ffffff;
     color: #000000;
+    overflow-wrap: break-word;
 }

@@ -1,0 +1,22 @@
+.searchItem{
+	/*position: absolute;*/
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin-top: 15px;
+	margin-left: 20px;
+	margin-bottom: 20px;
+	margin-right: 20px;
+}
+
+.searchItem:hover{
+background-color: rgb(245, 243, 243);
+}
+
+.searchItemImg{
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	object-fit: cover;
+	margin-right: 5px;
+}

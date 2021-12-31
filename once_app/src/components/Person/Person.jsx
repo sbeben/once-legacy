@@ -1,16 +1,24 @@
 import './person.css';
 import Contacts from '../Contacts/Contacts';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
-import { useContext } from 'react';
-import { AuthContext } from '../../context/AuthContext';
+import { AuthContext, dispatch } from '../../context/AuthContext';
+import EditIcon from '@material-ui/icons/Edit';
 
 export default function Person({user}) {
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 	const [contacts, setContacts] = useState([]);
 	const {user:currentUser, dispatch} = useContext(AuthContext);
 	const [followed, setFollowed] = useState(currentUser.follows.includes(user?._id));
+	const [isEditing, setIsEditing] = useState(false);
+	const [editedInfo, setEditedInfo] = useState({});
+
+	console.log(editedInfo);
+
+	useEffect(() => {
+   		setEditedInfo({userId:user._id, desc: user.desc, city: user.city, from: user.from, status: user.status})
+	}, [user]);
 
 	useEffect(() => {
 		setContacts([]);
@@ -20,11 +28,41 @@ export default function Person({user}) {
 					setContacts(contactList.data);
 			}catch(err){
 				console.log(err);
-			}	
+			}
+				
 		};
 		getContacts();
 		setFollowed(currentUser.follows.includes(user?._id));
-	}, [user._id]);
+	}, [user._id, currentUser.follows]);
+
+	const editDesc = (e) => {
+		setEditedInfo({ ...editedInfo, desc: e.target.value})
+	}
+	const editCity = (e) => {
+		setEditedInfo({ ...editedInfo, city: e.target.value})
+	}
+	const editFrom = (e) => {
+		setEditedInfo({ ...editedInfo, from: e.target.value})
+	}
+	const editProfilePic = (e) => {
+		setEditedInfo({ ...editedInfo, profilePicture: e.target.value})
+	}
+
+
+	// const editStatus = (e) => {
+	// 	setEditedInfo({ ...editedInfo, city: e.target.value})
+	// }
+
+	const updateInfo = async () => {
+		try {
+			const res = await axios.put("/users/" + user._id, editedInfo);
+			dispatch({type: "LOGIN_SUCCESS", payload: res.data});
+			console.log(res.data);
+			window.location.reload();
+		} catch(err) {
+			console.log(err);
+		}
+	}
 
 	const handleFollow = async () => {
 		try {
@@ -53,21 +91,42 @@ export default function Person({user}) {
 	return(
 		<div className="profileTop">
 			<div className="profileInfo">
-				<img className="profileImg" src={user.profilePicture ? PF + user.profilePicture : PF+"8.jpg"} alt=""/>
+				<img className="profileImg" src={user.profilePicture && user.profilePicture.length > 5 ? user.profilePicture : PF+"8.jpg"} alt=""/>
 				<div className="profileInfoText">
-					<h4 className="profileInfoName">{user.username}</h4>
+					<div className="nameAndEdit">
+						<h4 className="profileInfoName">{user.username}</h4>
+						{isEditing && <button className="editButton" onClick={() => updateInfo()}>append</button>}
+						{(user.username === currentUser.username || user.isAdmin === true)  && (
+								<EditIcon className="editIcon" onClick={() => setIsEditing(!isEditing)} ></EditIcon>
+						)}
+					</div>
+					{!isEditing ?
 					<span className="profileInfoDesc">{user.desc}</span>
+					:
+					<input type="text" className="editDesc" value={editedInfo.desc} maxLength="80" onChange={(e) => editDesc(e)}/>
+					}
+					{isEditing &&
+					<input type="text" className="editPic" placeholder="profile picture link" maxLength="300" onChange={(e) => editProfilePic(e)}/>	
+					}
 					<div className="profileInfoItems">
 						{user.username !== currentUser.username && (
 							<button onClick={handleFollow} className="addContactButton">{followed ? "Unfollow" : "Follow"}</button>
 						)}
 						<div className="profileInfoItem">
 							<span className="profileInfoKey">City: </span>
+							{!isEditing ?
 							<span className="profileInfoValue">{user.city}</span>
+							:
+							<input type="text" className="profileInfoValue" value={editedInfo.city} maxLength="30" onChange={(e) => editCity(e)}/>
+							}
 						</div>
 						<div className="profileInfoItem">
 							<span className="profileInfoKey">From: </span>
+							{!isEditing ?
 							<span className="profileInfoValue">{user.from}</span>
+							:
+							<input type="text" className="profileInfoValue" value={editedInfo.from} maxLength="30" onChange={(e) => editFrom(e)}/>
+							}
 						</div>
 						<div className="profileInfoItem">
 							<span className="profileInfoKey">Status: </span>
@@ -77,8 +136,8 @@ export default function Person({user}) {
 							<span className="profileInfoKey">Contacts: </span>
 							<span className="profileInfoValue">
 							{contacts.map(friend => (
-							<Link to={"/profile/" + friend.username} style={{textDecoration: "none"}}>
-							<Contacts key={friend._id} user={friend}/>
+								<Link to={"/profile/" + friend.username} style={{textDecoration: "none"}}>
+								<Contacts key={friend._id} user={friend}/>
 							</Link>
 							))}
 							</span>

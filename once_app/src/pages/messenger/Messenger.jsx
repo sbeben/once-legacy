@@ -16,13 +16,12 @@ export default function Messenger() {
 	const scrollRef = useRef();
 	const {user} = useContext(AuthContext);
 
-	console.log(conversations);
-
 useEffect(() => {
 	const getConversations = async () => {
 		try{
 			const res = await axios.get("/conversations/" + user._id);
 			setConversations(res.data);
+			console.log(conversations)
 		} catch(err){
 			console.log(err.message);
 		}
@@ -102,7 +101,7 @@ useEffect(() => {
 						(<span className="noConversationText"> Who do you wanna talk to</span>)
 					}	
 			    </div>
-				<Rightbar />
+				{/*<Rightbar />*/}
 			</div>
 		</div>
 	)

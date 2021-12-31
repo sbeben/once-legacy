@@ -41,7 +41,7 @@ export default function Share() {
 		<div className="share">
 			<div className="shareWrapper">
 				<div className="shareTop">
-					<img className="shareProfileImg" src={user.profilePicture ? PF + user.profilePicture : PF+"8.jpg"} alt=""/>
+					<img className="shareProfileImg" src={user.profilePicture && user.profilePicture.length > 5 ? user.profilePicture : PF+"8.jpg"} alt=""/>
 					<input 
 						className="shareInput" 
 						placeholder={"Share your thoughts carefully, " + user.username} 
