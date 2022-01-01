@@ -24,8 +24,8 @@ export default function Person({user}) {
 		setContacts([]);
 		const getContacts = async () => {
 			try{
-					const contactList = await axios.get("/users/friends/" + user._id);
-					setContacts(contactList.data);
+				const contactList = await axios.get("/users/friends/" + user._id);
+				setContacts(contactList.data);
 			}catch(err){
 				console.log(err);
 			}

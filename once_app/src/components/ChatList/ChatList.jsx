@@ -13,7 +13,6 @@ export default function ChatList({conversation, currentUser}) {
 		const getUser = async () => {
 			try{
 				const res = await axios("/users?userId=" + friendId);
-				console.log(res.data);
 				setUser(res.data);
 			} catch(err) {
 				console.log(err);

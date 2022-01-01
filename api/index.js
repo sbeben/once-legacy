@@ -31,7 +31,7 @@ app.use("/images", express.static(path.join(__dirname, "public/images")));
 app.use(express.json());
 app.use(helmet());
 app.use(morgan("common"));
-//multer config for uploading files into db 
+//multer config for uploading files into db
 const storage = multer.diskStorage({
 	destination: (req, file, cb) => {
 		cb(null,"public/images");
@@ -41,7 +41,7 @@ const storage = multer.diskStorage({
 	}
 })
 
-const upload = multer({storage: storage});
+const upload = multer({storage: storage, limits: { fileSize: 2000000 }});
 app.post("/api/upload", upload.single("file"), (req,res) => {
 	try{
 		return res.status(200).json("File uploaded successfully");

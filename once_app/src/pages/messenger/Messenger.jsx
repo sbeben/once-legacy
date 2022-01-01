@@ -10,9 +10,11 @@ import axios from 'axios';
 export default function Messenger() {
 
 	const [conversations, setConversations] = useState([]);
+	// const [contactData, setContactData] = useState(null);
 	const [currentChat, setCurrentChat] = useState(null);
 	const [messages, setMessages] = useState([]);
 	const [newMessage, setNewMessage] = useState("");
+	//const [isMessageAllowed, setIsMessageAllowed] = useState(true);
 	const scrollRef = useRef();
 	const {user} = useContext(AuthContext);
 
@@ -21,7 +23,7 @@ useEffect(() => {
 		try{
 			const res = await axios.get("/conversations/" + user._id);
 			setConversations(res.data);
-			console.log(conversations)
+			console.log("conversations", conversations)
 		} catch(err){
 			console.log(err.message);
 		}
@@ -29,11 +31,27 @@ useEffect(() => {
 	getConversations();
 }, [user._id]);
 
+// useEffect(() => {
+// 		const friendId = conversation.members.find( (m) => m!==currentUser._id);
+// 		const getUser = async () => {
+// 			try{
+// 				const res = await axios("/users?userId=" + friendId);
+// 				console.log(res.data);
+// 				setUser(res.data);
+// 			} catch(err) {
+// 				console.log(err);
+// 			}
+// 		};
+// 		getUser();
+// 	}, [currentUser, conversation]);
+
 useEffect(() => {
 	const getMessages = async () => {
 	  try {
 	    const res = await axios.get("/messages/" + currentChat?._id);
 	    setMessages(res.data);
+	    console.log(messages);
+	    //compareDates();
 	  } catch (err) {
 	    console.log(err);
 	  }
@@ -52,6 +70,7 @@ const handleSubmit = async (e) => {
 		const res = await axios.post("/messages", message);
 		setMessages([...messages, res.data]);
 		setNewMessage("");
+		//setIsMessageAllowed(false);
 	}catch(err){
 		console.log(err.message);
 	}
@@ -60,6 +79,15 @@ const handleSubmit = async (e) => {
 useEffect(() => {
 	scrollRef.current?.scrollIntoView({behavior: "smooth"});
 }, [messages])
+
+
+// const compareDates = () => {
+// 	console.log(messages);
+// 	let lastMessage = messages?.at(-1)
+// 	const result = (new Date() - new Date(lastMessage.updatedAt)) / 60000;
+// 	console.log(result);
+// 	if (result < 1440){setIsMessageAllowed(false)}else{setIsMessageAllowed(true)}
+// }
 
 	return(
 		<div>
@@ -95,7 +123,7 @@ useEffect(() => {
 									value={newMessage}
 								>
 								</textarea>
-								<button className="chatSubmitButton" onClick={handleSubmit}>Send</button>
+								<button className="chatSubmitButton" onClick={()=>handleSubmit()}>Send</button>
 							</div>
 						</>) : 
 						(<span className="noConversationText"> Who do you wanna talk to</span>)

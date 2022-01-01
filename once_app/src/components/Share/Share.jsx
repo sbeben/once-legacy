@@ -59,7 +59,7 @@ export default function Share() {
 					<div className="shareOptions">	
 						<label htmlFor="file" className="shareOption">
 							<PermMedia className="shareIcon"/>
-							<span className="shareOptionText">Media</span>
+							<span className="shareOptionText">Picture</span>
 							<input 
 								type="file"
 								id="file"
@@ -67,19 +67,12 @@ export default function Share() {
 								onChange={(e)=>setFile(e.target.files[0])}
 								style={{display:"none"}}
 							/>
+							<span className="uploadInfo">(up to 2mb)</span>	
 						</label>
-						<div className="shareOption">
-							<Label className="shareIcon"/>
-							<span className="shareOptionText">Tag</span>
-						</div>
-						<div className="shareOption">
+					{/*	<div className="shareOption">
 							<Room className="shareIcon"/>
 							<span className="shareOptionText">Place</span>
-						</div>
-						<div className="shareOption">
-							<EmojiEmotions className="shareIcon"/>
-							<span className="shareOptionText">Mood</span>
-						</div>
+						</div>*/}
 					</div>
 					<button className="shareButton" type="submit">Share</button>	
 				</form>

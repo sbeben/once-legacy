@@ -78,14 +78,9 @@
 	flex: 4;
 	display: flex;
 	align-items: center;
-	justify-content: space-around;
+	justify-content: space-between;
 	color: #000000;
-}
-
-.topbarLink{
-	margin-right: 10px;
-	font-size: 14px;
-	cursor: pointer;
+	margin-right: 20px;
 }
 
 .topbarIcons{
@@ -113,10 +108,17 @@
 	justify-content: center;
 }
 
+.topbarLogoutProfile{
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+
 .topbarImg {
 	width: 30px;
 	height: 30px;
 	border-radius: 50%;
 	object-fit: cover;
 	cursor: pointer;
+	margin-left: 20px;
 }

@@ -2,3 +2,12 @@
 	margin: 0;
 	font-family: 'Source Code Pro', monospace;
 }
+
+a { 
+	text-decoration: none; 
+}
+
+a:visited { 
+	text-decoration: none; 
+	color: #000000; 
+}

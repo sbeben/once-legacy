@@ -23,6 +23,19 @@
 	align-items: center;
 }
 
+.postTopRight{
+	display: flex;
+	align-items: center;
+}
+
+.editDeleteIcons{
+	font-size: 20px !important;
+}
+
+.saveDelete{
+	font-size: 15px;
+}
+
 .postProfileImg{
 	height: 50px;
 	width: 50px;
@@ -52,6 +65,19 @@
 
 .postText{
 	overflow-wrap: break-word;
+}
+
+.editPostText{
+	width: 95%;
+	border-style: solid;
+	border-color: #000000;
+	border-width: 1px;
+}
+
+.editPostText:focus{
+	border-style: solid;
+	border-color: #000000;
+	border-width: 1px;
 }
 
 .postBottom{
