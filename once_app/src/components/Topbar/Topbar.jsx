@@ -4,7 +4,10 @@ import {Search, Person, Chat, Notifications} from "@material-ui/icons";
 import {Link} from 'react-router-dom';
 import {logoutCall} from "../../apiCalls"
 import { useRef, useContext, useState, useEffect } from 'react';
-import { AuthContext } from '../../context/AuthContext';
+
+import { useSelector, useDispatch } from 'react-redux';
+
+//import { AuthContext } from '../../context/AuthContext';
 import axios from 'axios';
 
 export default function Topbar() {
@@ -13,7 +16,9 @@ export default function Topbar() {
 	const [searchResult, setSearchResult] = useState([]);
 
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-	const {user, dispatch} = useContext(AuthContext);
+	//const {user, dispatch} = useContext(AuthContext);
+	const user = useSelector(state => state.user);
+	const dispatch = useDispatch();
 
 	const handleSearch = async (e) => {
 		e.preventDefault();
