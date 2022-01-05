@@ -3,18 +3,17 @@ import Contacts from '../Contacts/Contacts';
 import { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
-import { AuthContext, dispatch } from '../../context/AuthContext';
 import EditIcon from '@material-ui/icons/Edit';
+import { useSelector, useDispatch } from 'react-redux'; 
 
 export default function Person({user}) {
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-	const [contacts, setContacts] = useState([]);
-	const {user:currentUser, dispatch} = useContext(AuthContext);
-	const [followed, setFollowed] = useState(currentUser.follows.includes(user?._id));
+	const [contacts, setContacts] = useState([]);	
+	const currentUser = useSelector(state => state.user);
+	const [followed, setFollowed] = useState(currentUser?.follows.includes(user?._id));
 	const [isEditing, setIsEditing] = useState(false);
 	const [editedInfo, setEditedInfo] = useState({});
-
-	console.log(editedInfo);
+	const dispatch = useDispatch();
 
 	useEffect(() => {
    		setEditedInfo({userId:user._id, desc: user.desc, city: user.city, from: user.from, status: user.status})
@@ -32,8 +31,8 @@ export default function Person({user}) {
 				
 		};
 		getContacts();
-		setFollowed(currentUser.follows.includes(user?._id));
-	}, [user._id, currentUser.follows]);
+		setFollowed(currentUser?.follows.includes(user?._id));
+	}, [user._id, currentUser?.follows]);
 
 	const editDesc = (e) => {
 		setEditedInfo({ ...editedInfo, desc: e.target.value})
@@ -57,7 +56,6 @@ export default function Person({user}) {
 		try {
 			const res = await axios.put("/users/" + user._id, editedInfo);
 			dispatch({type: "LOGIN_SUCCESS", payload: res.data});
-			console.log(res.data);
 			window.location.reload();
 		} catch(err) {
 			console.log(err);
@@ -96,7 +94,7 @@ export default function Person({user}) {
 					<div className="nameAndEdit">
 						<h4 className="profileInfoName">{user.username}</h4>
 						{isEditing && <button className="editButton" onClick={() => updateInfo()}>append</button>}
-						{(user.username === currentUser.username || user.isAdmin === true)  && (
+						{(user.username === currentUser?.username || user.isAdmin === true)  && (
 								<EditIcon className="editIcon" onClick={() => setIsEditing(!isEditing)} ></EditIcon>
 						)}
 					</div>
@@ -109,7 +107,7 @@ export default function Person({user}) {
 					<input type="text" className="editPic" placeholder="profile picture link" maxLength="300" onChange={(e) => editProfilePic(e)}/>	
 					}
 					<div className="profileInfoItems">
-						{user.username !== currentUser.username && (
+						{user.username !== currentUser?.username && (
 							<button onClick={handleFollow} className="addContactButton">{followed ? "Unfollow" : "Follow"}</button>
 						)}
 						<div className="profileInfoItem">

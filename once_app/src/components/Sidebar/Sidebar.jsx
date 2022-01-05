@@ -1,9 +1,9 @@
 import './sidebar.css';
 import Contacts from '../Contacts/Contacts';
-import { useContext } from 'react';
-import { AuthContext } from '../../context/AuthContext';
 import {Users} from '../../data';
 import {Link} from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { RssFeed,
 	Chat,
@@ -14,7 +14,23 @@ import { RssFeed,
 
 export default function Sidebar() {
 
-	const {user} = useContext(AuthContext);
+	const user = useSelector(state => state.user);
+	
+	// const [friends, setFriends] = useState([]);
+
+	// useEffect(() => {
+	// 	setFriends([]);
+	// 	const getFriends = async () => {
+	// 		try{
+	// 			const contactList = await axios.get("/users/friends/" + user._id);
+	// 			setFriends(contactList.data);
+	// 		}catch(err){
+	// 			console.log(err);
+	// 		}
+				
+	// 	};
+	// 	getFriends();
+	// }, [user._id]);
 
 	return (
 		<div className="sidebar">
@@ -49,14 +65,16 @@ export default function Sidebar() {
 			 		</li>
 				 </ul>
 				 <hr className="sidebarHr"/>
-				
+				{/*
 				<ul className="sidebarFriendList">
-					{Users.map(friend => (
-						<Contacts key={friend.id} user={friend}/>
+					{friends.map(f => (
+						<Link to={`/profile/${f.username}`}>
+							<Contacts key={f._id} user={f}/>
+						</Link>
 					))} 	
-				</ul>
-
-				{/*original sidebar friendlist
+				</ul>*/}
+{/*
+				original sidebar friendlist
 				 <ul className="sidebarFriendList">
 				 	<li className="sidebarFriend">
 				 		<img className="sidebarFriendImg" src="/assets/ded.jpg" alt=""/>

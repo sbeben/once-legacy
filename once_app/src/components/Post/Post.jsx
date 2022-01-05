@@ -9,13 +9,11 @@ import {useEffect, useState, useRef} from 'react';
 import axios from 'axios';
 import {format} from 'timeago.js';
 import {Link} from 'react-router-dom';
-import { useContext } from 'react';
-import { AuthContext } from '../../context/AuthContext';
+import { useSelector } from 'react-redux';
 
 export default function Post({post}) {
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-	const {user:currentUser} = useContext(AuthContext);
-	
+	const currentUser = useSelector(state => state.user);
 	const editedPost = useRef();
 	const [like, setLike] = useState(post.likes.length);
 	const [isLiked, setIsLiked] = useState(false);
@@ -33,8 +31,8 @@ export default function Post({post}) {
 	}, [post.userId]);
 
 	useEffect(()=>{
-		setIsLiked(post.likes.includes(currentUser._id))
-	},[currentUser._id,post.likes])
+		setIsLiked(post.likes.includes(currentUser?._id))
+	},[currentUser?._id,post.likes])
 
 	const likeHandler = () => {
 		try{
@@ -86,7 +84,7 @@ export default function Post({post}) {
 									: 
 									<><span className="saveDelete">delete?</span><CheckIcon onClick={()=>handleDelete()}/><ClearIcon onClick={()=>setRemoving(!removing)}/></>}
 							</>)}
-						{(user.username === currentUser.username || user.isAdmin === true) && (<MoreVert onClick={() => setOptions(!options)}/>)}
+						{(user.username === currentUser?.username || user.isAdmin === true) && (<MoreVert onClick={() => setOptions(!options)}/>)}
 					</div>
 				</div>
 				<div className="postCenter">

@@ -3,20 +3,15 @@ import SearchResult from '../SearchResult/SearchResult'
 import {Search, Person, Chat, Notifications} from "@material-ui/icons";
 import {Link} from 'react-router-dom';
 import {logoutCall} from "../../apiCalls"
-import { useRef, useContext, useState, useEffect } from 'react';
-
+import { useRef, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-
-//import { AuthContext } from '../../context/AuthContext';
 import axios from 'axios';
 
 export default function Topbar() {
 	const searchQuery  = useRef();
 	const searchContainerRef = useRef();
 	const [searchResult, setSearchResult] = useState([]);
-
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-	//const {user, dispatch} = useContext(AuthContext);
 	const user = useSelector(state => state.user);
 	const dispatch = useDispatch();
 

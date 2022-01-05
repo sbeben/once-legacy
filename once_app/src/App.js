@@ -1,6 +1,4 @@
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
-//import { useContext } from 'react';
-//import { AuthContext } from './context/AuthContext';
 import { useSelector } from 'react-redux';
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
@@ -8,11 +6,9 @@ import Register from "./pages/register/Register";
 import Profile from "./components/Profile/Profile";
 import Messenger from "./pages/messenger/Messenger";
 
-
 function App() {
 
   const user = useSelector(state => state.user);
-  console.log(user);
 
   return (  
     <div>

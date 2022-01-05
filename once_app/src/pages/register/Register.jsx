@@ -2,8 +2,9 @@ import './register.css';
 import {Link} from 'react-router-dom';
 import { useRef, useContext} from 'react';
 import { useHistory } from 'react-router';
-import {regCall} from "../../apiCalls"
-import {AuthContext} from "../../context/AuthContext";
+import {regCall} from "../../apiCalls";
+import { useSelector, useDispatch } from 'react-redux';
+//import {AuthContext} from "../../context/AuthContext";
 
 export default function Register() {
 
@@ -11,7 +12,9 @@ export default function Register() {
 	const password = useRef();
 	const username = useRef();
 	const passwordRepeat = useRef();
-	const {user, isFetching, error, dispatch} = useContext(AuthContext);
+	const stateData = useSelector(state => state);
+	const {user, isFetching, error} = stateData;
+	const dispatch = useDispatch();
 	const history = useHistory();
 
 	const handleClick = (e) => {

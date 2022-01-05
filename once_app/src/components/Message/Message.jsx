@@ -2,14 +2,15 @@ import './message.css';
 import  {format}  from "timeago.js";
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useContext } from 'react';
-import { AuthContext } from '../../context/AuthContext'; 
+//import { useContext } from 'react';
+//import { AuthContext } from '../../context/AuthContext';
+import { useSelector } from 'react-redux'; 
 
 export default function Message({message, own}) {
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 	const [senderInfo, setSenderInfo] = useState({});
-	const {user} = useContext(AuthContext);
-
+	//const {user} = useContext(AuthContext);
+	const user = useSelector(state => state.user);
 	useEffect(()=>{
 		const getUser = async () => {
 			const res = await axios.get("/users?userId=" + message.sender);

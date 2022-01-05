@@ -31,7 +31,7 @@ export default function Profile() {
 				<Sidebar/>
 				<div className="profileContainer">
 					<Suspense fallback={<div>loading...</div>}>
-						<Person user={user}/>
+						<Person user={user} key={user._id}/>
         			</Suspense>				
 					<hr className="profileHr"/>
 					<div className="profileBottom">

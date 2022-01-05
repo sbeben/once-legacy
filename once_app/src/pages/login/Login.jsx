@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom';
 import {useRef, useContext} from 'react';
 import {loginCall} from "../../apiCalls";
 import { useSelector, useDispatch } from 'react-redux';
-//import {AuthContext} from "../../context/AuthContext";
 
 export default function Login() {
 	
@@ -18,8 +17,6 @@ export default function Login() {
 		loginCall({email : email.current.value, password: password.current.value}, dispatch);
 	};
 
-
-
 	return (
 		<div className="login">
 			<div className="loginWrapper">
@@ -28,7 +25,7 @@ export default function Login() {
 					<span className="loginDesc">Healthy communication</span>
 				</div>
 				<div className="loginRight">
-					<form className="loginBox" onSubmit={()=>handleClick()}>
+					<form className="loginBox" onSubmit={handleClick}>
 						<input required type="email" placeholder="Email" className="loginInput" ref={email}/>
 						<input required type ="password" placeholder="Password" className="loginInput" ref={password}/>
 						<button className="loginButton" type ="submit" disabled={isFetching}>{isFetching ? "loading" : "Log In"}</button>

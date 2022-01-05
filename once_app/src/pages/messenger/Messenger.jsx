@@ -3,9 +3,9 @@ import Topbar from "../../components/Topbar/Topbar";
 import ChatList from "../../components/ChatList/ChatList";
 import Rightbar from "../../components/Rightbar/Rightbar";
 import Message from "../../components/Message/Message";
-import { useContext, useEffect, useState, useRef } from 'react';
-import { AuthContext } from '../../context/AuthContext';
+import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 export default function Messenger() {
 
@@ -16,20 +16,22 @@ export default function Messenger() {
 	const [newMessage, setNewMessage] = useState("");
 	//const [isMessageAllowed, setIsMessageAllowed] = useState(true);
 	const scrollRef = useRef();
-	const {user} = useContext(AuthContext);
+	const user = useSelector(state => state.user);
 
 useEffect(() => {
 	const getConversations = async () => {
 		try{
 			const res = await axios.get("/conversations/" + user._id);
 			setConversations(res.data);
-			console.log("conversations", conversations)
+			console.log("conversations", conversations);
 		} catch(err){
 			console.log(err.message);
 		}
 	};
 	getConversations();
 }, [user._id]);
+
+console.log("outside conversations", conversations);
 
 // useEffect(() => {
 // 		const friendId = conversation.members.find( (m) => m!==currentUser._id);
