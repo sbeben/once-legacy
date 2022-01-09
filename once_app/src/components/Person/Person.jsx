@@ -1,15 +1,18 @@
 import './person.css';
 import Contacts from '../Contacts/Contacts';
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
 import EditIcon from '@material-ui/icons/Edit';
 import { useSelector, useDispatch } from 'react-redux'; 
+import CheckIcon from '@material-ui/icons/Check';
+import ClearIcon from '@material-ui/icons/Clear';
 
 export default function Person({user}) {
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 	const [contacts, setContacts] = useState([]);	
 	const currentUser = useSelector(state => state.user);
+	const [permission, setPermission] = useState(user.username === currentUser?.username || user.isAdmin === true);
 	const [followed, setFollowed] = useState(currentUser?.follows.includes(user?._id));
 	const [isEditing, setIsEditing] = useState(false);
 	const [editedInfo, setEditedInfo] = useState({});
@@ -46,11 +49,9 @@ export default function Person({user}) {
 	const editProfilePic = (e) => {
 		setEditedInfo({ ...editedInfo, profilePicture: e.target.value})
 	}
-
-
-	// const editStatus = (e) => {
-	// 	setEditedInfo({ ...editedInfo, city: e.target.value})
-	// }
+	const editStatus = (e) => {
+		setEditedInfo({ ...editedInfo, status: e.target.value})
+	}
 
 	const updateInfo = async () => {
 		try {
@@ -60,7 +61,7 @@ export default function Person({user}) {
 		} catch(err) {
 			console.log(err);
 		}
-	}
+	};
 
 	const handleFollow = async () => {
 		try {
@@ -93,9 +94,12 @@ export default function Person({user}) {
 				<div className="profileInfoText">
 					<div className="nameAndEdit">
 						<h4 className="profileInfoName">{user.username}</h4>
-						{isEditing && <button className="editButton" onClick={() => updateInfo()}>append</button>}
-						{(user.username === currentUser?.username || user.isAdmin === true)  && (
-								<EditIcon className="editIcon" onClick={() => setIsEditing(!isEditing)} ></EditIcon>
+						{isEditing ? 
+							<div className="editing"><CheckIcon className="editIcons" onClick={() => updateInfo()}></CheckIcon>
+							<ClearIcon className="editIcons" onClick={()=>setIsEditing(!isEditing)}></ClearIcon></div>
+							:
+							permission === true  && (
+								<EditIcon className="editIcons" onClick={() => setIsEditing(!isEditing)} ></EditIcon>
 						)}
 					</div>
 					{!isEditing ?
@@ -127,9 +131,18 @@ export default function Person({user}) {
 							}
 						</div>
 						<div className="profileInfoItem">
-							<span className="profileInfoKey">Status: </span>
+							<label for="status" className="profileInfoKey">Status: </label>
+							{!isEditing ?
 							<span className="profileInfoValue">{user.status === 1 ? "Active" : user.status === 2 ? "Inactive" : "Reasoning"}</span>
+							:
+							<select name="status" value={editedInfo.status} onChange={(e) => editStatus(e)}>
+							  <option value="1">Active</option>
+							  <option value="2">Inactive</option>
+							  <option value="3">Reasoning</option>
+							</select>
+							}
 						</div>
+						{!permission === true &&
 						<div className="profileInfoItem">
 							<span className="profileInfoKey">Contacts: </span>
 							<span className="profileInfoValue">
@@ -139,7 +152,7 @@ export default function Person({user}) {
 							</Link>
 							))}
 							</span>
-						</div>
+						</div>}
 					</div>
 				</div>
 			</div>

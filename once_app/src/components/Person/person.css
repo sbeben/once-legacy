@@ -6,6 +6,7 @@
 }
 
 .profileInfo{
+	width: 100%;
 	display: flex;
 }
 
@@ -23,13 +24,22 @@
 	overflow-wrap: break-word;
 }
 
+.infoWrapper{
+	width: 100%;
+}
+
 .profileInfoName{
 	font-size: 32px;
 	font-weight: bold;
-	overflow-wrap: break-word
+	overflow-wrap: break-word;
 }
 
-.editIcon{
+.profileInfoDesc{
+	overflow-wrap: break-word;
+}
+
+
+.editIcons{
 	cursor: pointer !important;
 }
 
@@ -64,4 +74,8 @@
 
 .profileInfoKey{
 	font-weight: bold;
+}
+
+.profileInfoValue{
+	overflow-wrap: break-word;
 }
