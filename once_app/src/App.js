@@ -5,6 +5,9 @@ import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import Profile from "./components/Profile/Profile";
 import Messenger from "./pages/messenger/Messenger";
+import Settings from "./pages/settings/Settings";
+import About from "./pages/about/About";
+
 
 function App() {
 
@@ -28,6 +31,12 @@ function App() {
             </Route>
             <Route exact path="/profile/:username">
              {!user ? <Redirect to="/"/> : <Profile/>}
+            </Route>
+            <Route exact path="/settings">
+             {!user ? <Redirect to="/"/> : <Settings/>}
+            </Route>
+            <Route exact path="/about">
+             {!user ? <Redirect to="/"/> : <About/>}
             </Route>
           </Switch> 
         </Router>

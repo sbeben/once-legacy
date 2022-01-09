@@ -6,7 +6,6 @@ const mongoose = require("mongoose");
 //update user
 router.put("/:id", async (req,res) => {
 	//check if user id matches id in request or if it is an admin
-	console.log(req.body);
 	if(req.body.userId === req.params.id || req.body.isAdmin){
 		//if user changes his password we have to encrypt it again
 		if(req.body.password){
@@ -23,7 +22,6 @@ router.put("/:id", async (req,res) => {
 			const user = await User.findByIdAndUpdate(req.params.id, {
 				$set: req.body
 			});
-			console.log("changed user:", user);
 			return res.status(200).json(user);
 		} catch(err) {
 			console.log(err);
@@ -52,7 +50,6 @@ router.delete("/:id", async (req,res) => {
 
 //get a user
 router.get("/", async (req, res) => {
-	console.log(req.query)
 	const userId = req.query.userId;
 	const username = req.query.username;
 	try {
@@ -68,15 +65,12 @@ router.get("/", async (req, res) => {
 //get contacts
 router.get("/friends/:userId", async (req,res) => {
 	try{
-		console.log("request contacts of user:", req.params);
 		const user = await User.findById(req.params.userId);
-		console.log("got user:", user);
 		const contacts = await Promise.all(
 			user.follows.map(friendId => {
 				return User.findById(friendId)
 			})
 		);
-		console.log("his contacts:", contacts)
 		let contactList = [];
 		contacts.map(friend => {
 			const {_id, username, profilePicture} = friend;

@@ -1,6 +1,6 @@
 import './login.css';
 import {Link} from 'react-router-dom';
-import {useRef, useContext} from 'react';
+import {useRef} from 'react';
 import {loginCall} from "../../apiCalls";
 import { useSelector, useDispatch } from 'react-redux';
 

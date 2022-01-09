@@ -1,10 +1,9 @@
 import './register.css';
 import {Link} from 'react-router-dom';
-import { useRef, useContext} from 'react';
+import { useRef } from 'react';
 import { useHistory } from 'react-router';
 import {regCall} from "../../apiCalls";
 import { useSelector, useDispatch } from 'react-redux';
-//import {AuthContext} from "../../context/AuthContext";
 
 export default function Register() {
 

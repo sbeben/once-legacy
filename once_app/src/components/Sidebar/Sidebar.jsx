@@ -55,14 +55,18 @@ export default function Sidebar() {
 					 		<span className="sidebarItemText">Messenger</span>
 					 	</li>
 					</Link>
-				 	<li className="sidebarListItem">
-				 		<Settings className="sidebarIcon"/>
-				 		<span className="sidebarItemText">Settings</span>
-				 	</li>
-				 	<li className="sidebarListItem">
-				 		<HelpOutline className="sidebarIcon"/>
-				 		<span className="sidebarItemText">About</span>
-			 		</li>
+					<Link to="/settings" >	
+					 	<li className="sidebarListItem">
+					 		<Settings className="sidebarIcon"/>
+					 		<span className="sidebarItemText">Settings</span>
+					 	</li>
+				 	</Link>
+				 	<Link to="/about" >
+					 	<li className="sidebarListItem">
+					 		<HelpOutline className="sidebarIcon"/>
+					 		<span className="sidebarItemText">About</span>
+				 		</li>
+			 		</Link>
 				 </ul>
 				 <hr className="sidebarHr"/>
 				

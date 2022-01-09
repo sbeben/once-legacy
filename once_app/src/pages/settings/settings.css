@@ -1,0 +1,23 @@
+.settings{
+	display: flex;
+}
+
+.settingsContainer{
+	flex: 9;
+}
+
+.settingsHeader{
+	margin: 20px 0 15px 0;
+
+}
+
+.settingsHr{
+	width: 80%;
+	margin: 25px 0 0 10%;
+}
+
+.settingsSection{
+	padding-left: 25px;
+	display: flex;
+	flex-direction: column;
+}

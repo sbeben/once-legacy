@@ -23,15 +23,12 @@ useEffect(() => {
 		try{
 			const res = await axios.get("/conversations/" + user._id);
 			setConversations(res.data);
-			console.log("conversations", conversations);
 		} catch(err){
 			console.log(err.message);
 		}
 	};
 	getConversations();
 }, [user._id]);
-
-console.log("outside conversations", conversations);
 
 // useEffect(() => {
 // 		const friendId = conversation.members.find( (m) => m!==currentUser._id);
@@ -52,7 +49,6 @@ useEffect(() => {
 	  try {
 	    const res = await axios.get("/messages/" + currentChat?._id);
 	    setMessages(res.data);
-	    console.log(messages);
 	    //compareDates();
 	  } catch (err) {
 	    console.log(err);
@@ -82,6 +78,7 @@ useEffect(() => {
 	scrollRef.current?.scrollIntoView({behavior: "smooth"});
 }, [messages])
 
+console.log(conversations);
 
 // const compareDates = () => {
 // 	console.log(messages);
@@ -97,10 +94,10 @@ useEffect(() => {
 			<div className="messenger">
 				<div className="chatListWrapper">
 					<ul className="chatList">
-					{
+					{ conversations !== [] &&
 						conversations.map(c=>(
 							<div onClick={()=>{setCurrentChat(c);}}>
-							<ChatList conversation={c} currentUser={user} key={c.members[1]}/>
+								<ChatList conversation={c} currentUser={user} key={c._id}/>
 							</div>
 						))
 					}
@@ -111,7 +108,8 @@ useEffect(() => {
 						currentChat ? 
 						(<>
 							<div className="chatBoxTop">
-							{messages.map(m => (
+							{ messages !== [] &&
+								messages.map(m => (
 								<div ref={scrollRef}>
 									<Message message={m} own={m.sender === user._id} key={m._id}/>	
 								</div>

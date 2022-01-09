@@ -67,7 +67,7 @@ export default function Topbar() {
 				}
 			</div>	
 			<div className="topbarRight">
-				<div className="topbarIcons">
+				{/*<div className="topbarIcons">
 					<div className="topbarIconItem">
 						<Person/>
 						<span className="topbarIconBadge">1</span>
@@ -80,7 +80,7 @@ export default function Topbar() {
 						<Notifications/>
 						<span className="topbarIconBadge">1</span>
 					</div>
-				</div>
+				</div>*/}
 				<div className="topbarLogoutProfile"> 
 					<Link to="/login" style={{textDecoration: "none"}}>
 						<span className="topbarLink" onClick={handleLogout}>Logout</span>
